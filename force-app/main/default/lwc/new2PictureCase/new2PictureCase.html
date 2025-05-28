@@ -1,0 +1,8 @@
+<template>
+    <div if:true={richTextContent} style={containerStyle} class="image-container">
+        <lightning-formatted-rich-text value={richTextContent}></lightning-formatted-rich-text>
+    </div>
+    <div if:true={error}>
+        Error: {error}
+    </div>
+</template>

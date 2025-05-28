@@ -1,0 +1,16 @@
+<!-- carrosClassicos.html -->
+<template>
+    <lightning-card title="Carros Clássicos Brasileiros" icon-name="utility:car">
+        <div class="slds-m-around_medium">
+            <lightning-datatable
+                key-field="id"
+                data={data}
+                columns={columns}
+                sorted-by={sortedBy}
+                sorted-direction={sortDirection}
+                default-sort-direction={defaultSortDirection}
+                onsort={onHandleSort}>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

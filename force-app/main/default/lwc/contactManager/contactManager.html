@@ -1,0 +1,98 @@
+<template>
+    <lightning-card title="Cadastro de Contato">
+        <div class="slds-p-horizontal_medium">
+            <div class="slds-grid slds-gutters">
+                <!-- Nome e Sobrenome -->
+                <div class="slds-col">
+                    <lightning-input 
+                        label="Nome" 
+                        value={firstName}
+                        onchange={handleFirstNameChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input 
+                        label="Sobrenome" 
+                        required 
+                        value={lastName}
+                        onchange={handleLastNameChange}>
+                    </lightning-input>
+                </div>
+            </div>
+            
+            <div class="slds-m-top_medium">
+                <h3 class="slds-text-heading_small">Endereço de Correspondência</h3>
+                
+                <!-- CEP com Busca -->
+                <div class="slds-grid slds-gutters slds-m-top_small">
+                    <div class="slds-col slds-size_2-of-6">
+                        <lightning-input 
+                            label="CEP" 
+                            data-id="cepInput"
+                            value={mailingPostalCode}
+                            onchange={handleMailingPostalCodeChange}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-6 slds-align-bottom">
+                        <lightning-button 
+                            label="Buscar CEP" 
+                            onclick={handleCepSearch}
+                            variant="brand" 
+                            class="slds-m-top_medium">
+                        </lightning-button>
+                    </div>
+                </div>
+                
+                <!-- Rua -->
+                <div class="slds-m-top_small">
+                    <lightning-input 
+                        label="Rua" 
+                        value={mailingStreet}
+                        onchange={handleMailingStreetChange}>
+                    </lightning-input>
+                </div>
+                
+                <!-- Cidade -->
+                <div class="slds-m-top_small">
+                    <lightning-input 
+                        label="Cidade" 
+                        value={mailingCity}
+                        onchange={handleMailingCityChange}>
+                    </lightning-input>
+                </div>
+                
+                <!-- Estado e CEP -->
+                <div class="slds-grid slds-gutters slds-m-top_small">
+                    <div class="slds-col">
+                        <lightning-input 
+                            label="Estado/UF" 
+                            value={mailingState}
+                            onchange={handleMailingStateChange}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input 
+                            label="País" 
+                            value={mailingCountry}
+                            onchange={handleMailingCountryChange}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Botões -->
+            <div class="slds-m-top_medium slds-m-bottom_medium">
+                <lightning-button 
+                    label="Cancelar" 
+                    onclick={resetForm} 
+                    class="slds-m-right_small">
+                </lightning-button>
+                <lightning-button 
+                    label="Salvar" 
+                    variant="brand" 
+                    onclick={handleSave}>
+                </lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

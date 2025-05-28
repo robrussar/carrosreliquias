@@ -1,0 +1,151 @@
+:host {
+    /* Cores atualizadas para um dark theme premium */
+    --primary-color: #0400ff;       /* Roxo moderno */
+    --secondary-color: #00d4ff;    /* Azul elétrico */
+    --accent-color: #797979;       /* Rosa neon */
+    --text-primary: #fa0e0e;       /* Branco suave */
+    --text-secondary: #b5b5b5;     /* Cinza claro */
+    --background-dark: #e4007d;    /* Azul escuro */
+    --background-medium: #575757;   /* Azul médio */
+    --background-light: #1cf05b;   /* Azul mais claro */
+    --input-background: #6fd3bd;   /* Fundo dos inputs */
+    --border-color: #6741ee;       /* Bordas */
+    --success-color: #00ff9d;      /* Verde neon */
+}
+
+/* Estrutura base */
+.slds-theme_dark {
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* Container principal */
+.slds-card {
+    background: var(--background-medium);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(107, 53, 194, 0.3);
+    overflow: hidden;
+}
+
+/* Títulos das seções */
+.section-title {
+    color: var(--secondary-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 2rem 0 1.5rem;
+    position: relative;
+    padding-left: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-title:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 70%;
+    width: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+/* Campos do formulário */
+.slds-form-element {
+    margin-bottom: 1.5rem;
+}
+
+.slds-form-element__label {
+    color: var(--secondary-color) !important;
+    font-size: bold rem !important;
+    font-weight: bold !important;
+    margin-bottom: 0.5rem !important;
+    letter-spacing: 0.5px;
+}
+
+.slds-input, 
+.slds-select, 
+.slds-textarea,
+.slds-combobox__input {
+    background: var(--input-background) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem !important;
+    transition: all 0.3s ease;
+}
+
+.slds-input:focus, 
+.slds-select:focus, 
+.slds-textarea:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(110, 0, 255, 0.2) !important;
+}
+
+.slds-theme_inverse, 
+.slds-theme--inverse {
+    color: var(--slds-g-color-neutral-base-100, var(--lwc-colorTextInverse, white)) !important;
+    background-color: var(--accent-color) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+/* Checkboxes e radios */
+.slds-checkbox [type=checkbox]+.slds-checkbox__label .slds-checkbox_faux {
+    border-color: var(--border-color);
+    background: var(--input-background);
+}
+
+.slds-checkbox [type=checkbox]:checked+.slds-checkbox__label .slds-checkbox_faux {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Grid responsivo */
+.field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Placeholders estilizados */
+.slds-input::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.7 !important;
+}
+
+/* Valores selecionados/não selecionados */
+.slds-pill {
+    background: var(--primary-color) !important;
+    color: white !important;
+}
+
+.slds-pill__remove {
+    color: white !important;
+}
+
+/* Botões */
+.slds-button_brand {
+    background: var(--primary-color) !important;
+    border: none !important;
+    padding: 0.75rem 2rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.slds-button_brand:hover {
+    background: #5a00d4 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(110, 0, 255, 0.3);
+}

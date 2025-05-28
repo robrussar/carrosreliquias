@@ -1,0 +1,71 @@
+<template>
+    <lightning-card title="Countries Explorer" icon-name="custom:custom19">
+        <div class="slds-p-around_medium">
+            <!-- Search Box -->
+            <div class="slds-p-bottom_medium">
+                <lightning-input
+                    type="search"
+                    label="Search countries"
+                    value={searchTerm}
+                    onchange={handleSearch}
+                    variant="label-hidden"
+                    placeholder="Type a country name..."
+                ></lightning-input>
+            </div>
+            <!-- Loading Spinner -->
+            <template if:true={isLoading}>
+                <div class="slds-align_absolute-center slds-m-vertical_large">
+                    <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                </div>
+            </template>
+            <!-- Error Message -->
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <h2>{error}</h2>
+                </div>
+            </template>
+            <!-- Countries Grid -->
+            <template if:false={isLoading}>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template for:each={countries} for:item="country">
+                        <div key={country.countryCode} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
+                            <div class="slds-card slds-m-bottom_medium">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <template if:true={country.hasFlag}>
+                                                <img class="flag-img"
+                                                     src={country.flagUrl}
+                                                     alt={country.name}
+                                                     style="width:60px;height:auto;border:1px solid #dddbda">
+                                            </template>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span class="slds-text-heading_small">{country.name}</span>
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <ul class="slds-list_dotted">
+                                        <li class="slds-item">
+                                            <strong>Capital:</strong> {country.capital}
+                                        </li>
+                                        <li class="slds-item">
+                                            <strong>Region:</strong> {country.region}
+                                        </li>
+                                        <li class="slds-item">
+                                            <strong>Population:</strong> {country.formattedPopulation}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

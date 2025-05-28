@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="Lista de Pedidos" icon-name="standard:orders">
+        <!-- Exibir mensagem de erro se houver -->
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-p-horizontal_small">
+                {error}
+            </div>
+        </template>
+        
+        <!-- Exibir lista de pedidos -->
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={pedidos}
+                columns={columns}
+                hide-checkbox-column
+                onrowaction={handleRowAction}
+                onsort={handleSort}
+                sorted-by={sortBy}
+                sorted-direction={sortDirection}>
+            </lightning-datatable>
+            
+            <template if:true={pedidos.length}>
+                <div class="slds-m-top_small slds-text-align_right">
+                    Total de pedidos: {pedidos.length}
+                </div>
+            </template>
+            
+            <template if:false={pedidos.length}>
+                <div class="slds-text-align_center slds-m-top_medium">
+                    Nenhum pedido encontrado.
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

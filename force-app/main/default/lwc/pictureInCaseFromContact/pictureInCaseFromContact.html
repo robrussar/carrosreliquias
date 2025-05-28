@@ -1,0 +1,9 @@
+<template>
+    <div if:true={imageUrl}>
+        <img src={imageUrl} alt="Contact Image" style="max-width: 200px; max-height: 200px;" />
+        <p>URL da imagem: {imageUrl}</p>
+    </div>
+    <div if:true={error}>
+        {error}
+    </div>
+</template>

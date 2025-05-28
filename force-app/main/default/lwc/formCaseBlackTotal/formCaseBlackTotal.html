@@ -1,0 +1,98 @@
+<template>
+    <div class="slds-theme_dark slds-p-around_medium">
+        <lightning-card title="Novo Caso (Dark Themeaaaa)" icon-name="standard:case">
+            <div class="slds-p-around_medium">
+                <lightning-record-edit-form 
+                    object-api-name="Case" 
+                    onsuccess={handleSuccess}>
+                    
+                    <lightning-messages></lightning-messages>
+                    
+                    <!-- Seção Case Information -->
+                    <div class="slds-box slds-theme_default slds-m-bottom_medium">
+                        <h3 class="slds-section-title--divider slds-theme_inverse">Case Information</h3>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="Status" value="New" class="slds-m-bottom_small"></lightning-input-field>
+                                <lightning-input-field field-name="Priority" value="Medium" class="slds-m-bottom_small"></lightning-input-field>
+                                <lightning-input-field field-name="Origin" class="slds-m-bottom_small"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="Type" class="slds-m-bottom_small"></lightning-input-field>
+                                <lightning-input-field field-name="Reason" class="slds-m-bottom_small"></lightning-input-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção Contact Information -->
+                    <div class="slds-box slds-theme_default slds-m-bottom_medium">
+                        <h3 class="slds-section-title--divider slds-theme_inverse">Contact Information</h3>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="ContactId" class="slds-m-bottom_small"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="AccountId" class="slds-m-bottom_small"></lightning-input-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção Web Information -->
+                    <div class="slds-box slds-theme_default slds-m-bottom_medium">
+                        <h3 class="slds-section-title--divider slds-theme_inverse">Web Information</h3>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="SuppliedEmail" class="slds-m-bottom_small"></lightning-input-field>
+                                <lightning-input-field field-name="SuppliedCompany" class="slds-m-bottom_small"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="SuppliedName" class="slds-m-bottom_small"></lightning-input-field>
+                                <lightning-input-field field-name="SuppliedPhone" class="slds-m-bottom_small"></lightning-input-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção Additional Information -->
+                    <div class="slds-box slds-theme_default slds-m-bottom_medium">
+                        <h3 class="slds-section-title--divider slds-theme_inverse">Additional Information</h3>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="Product__c" class="slds-m-bottom_small"></lightning-input-field>
+                                <lightning-input-field field-name="EngineeringReqNumber__c" class="slds-m-bottom_small"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="PotentialLiability__c" class="slds-m-bottom_small"></lightning-input-field>
+                                <lightning-input-field field-name="SLAViolation__c" class="slds-m-bottom_small"></lightning-input-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção Description Information -->
+                    <div class="slds-box slds-theme_default slds-m-bottom_medium">
+                        <h3 class="slds-section-title--divider slds-theme_inverse">Description Information</h3>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning-input-field field-name="Subject" class="slds-m-bottom_small"></lightning-input-field>
+                                <lightning-input-field field-name="Description" class="slds-m-bottom_small"></lightning-input-field>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-m-top_medium">
+                        <lightning-button 
+                            type="submit" 
+                            label="Criar Caso" 
+                            variant="brand"
+                            class="slds-m-right_small">
+                        </lightning-button>
+                        <lightning-button 
+                            label="Cancelar" 
+                            onclick={handleCancel}
+                            variant="destructive">
+                        </lightning-button>
+                    </div>
+                </lightning-record-edit-form>
+            </div>
+        </lightning-card>
+    </div>
+</template>

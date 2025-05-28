@@ -1,0 +1,78 @@
+<template>
+    <lightning-card title="Novo Contato com Busca de CEP" icon-name="standard:contact">
+        <div class="slds-grid slds-gutters slds-p-horizontal_medium">
+            <!-- Coluna Esquerda - Dados do Contato -->
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-text-heading_medium slds-m-bottom_small">
+                    Informações do Contato
+                </div>
+                <lightning-input label="Nome" name="FirstName" onchange={handleFieldChange}></lightning-input>
+                <lightning-input label="Sobrenome" name="LastName" required onchange={handleFieldChange}></lightning-input>
+                <lightning-input label="Email" name="Email" type="email" onchange={handleFieldChange}></lightning-input>
+                <lightning-input label="Telefone" name="Phone" type="phone" onchange={handleFieldChange}></lightning-input>
+            </div>
+            
+            <!-- Coluna Direita - Busca de CEP -->
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-text-heading_medium slds-m-bottom_small">
+                    Endereço
+                </div>
+                
+                <!-- Seção de busca de CEP -->
+                <div class="slds-m-bottom_medium">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_2-of-3">
+                            <lightning-input 
+                                label="CEP" 
+                                type="text" 
+                                value={cepValue} 
+                                maxlength="9"
+                                placeholder="00000-000"
+                                onchange={handleCepChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-p-top_medium slds-p-left_small">
+                            <lightning-button 
+                                label="Buscar" 
+                                variant="brand" 
+                                onclick={handleSearchCep}
+                                disabled={isSearching}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Endereço -->
+                <lightning-input label="Logradouro" name="MailingStreet" value={endereco.logradouro} onchange={handleFieldChange}></lightning-input>
+                <lightning-input label="Cidade" name="MailingCity" value={endereco.cidade} onchange={handleFieldChange}></lightning-input>
+                <lightning-input label="Estado" name="MailingState" value={endereco.estado} onchange={handleFieldChange}></lightning-input>
+                <lightning-input label="CEP" name="MailingPostalCode" value={endereco.cep} onchange={handleFieldChange}></lightning-input>
+                <lightning-input label="País" name="MailingCountry" value="Brasil" onchange={handleFieldChange}></lightning-input>
+            </div>
+        </div>
+        
+        <!-- Botões -->
+        <div class="slds-m-top_medium slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={isSaving}>
+                <div class="slds-m-bottom_small">
+                    <lightning-spinner alternative-text="Salvando contato..." size="small"></lightning-spinner>
+                </div>
+            </template>
+            
+            <lightning-button
+                label="Cancelar"
+                variant="neutral"
+                onclick={handleCancel}
+                class="slds-m-right_small"
+                disabled={isSaving}>
+            </lightning-button>
+            
+            <lightning-button
+                label="Salvar"
+                variant="brand"
+                onclick={saveContact}
+                disabled={isSaving}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

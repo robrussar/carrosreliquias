@@ -1,0 +1,204 @@
+<template>
+    <div class="premium-case-view slds-theme_dark">
+        <!-- Cabeçalho do Caso -->
+        <div class="header-container slds-p-around_large">
+            <div class="slds-grid slds-wrap slds-grid_align-spread">
+                <div>
+                    <h1 class="case-title">CASE #{caseNumber}</h1>
+                    <p class="case-subject">{subject}</p>
+                </div>
+                <div class="status-badge" data-status={lowercaseStatus}>{status}</div>
+            </div>
+        </div>
+
+        <!-- Corpo Principal -->
+        <div class="main-container slds-p-horizontal_large">
+            <div class="slds-grid slds-wrap">
+                <!-- Coluna Esquerda - Detalhes do Caso -->
+                <div class="slds-col slds-large-size_2-of-3 slds-p-right_large">
+                    <!-- Abas -->
+                    <div class="tab-container slds-m-bottom_x-large">
+                        <ul class="slds-tabs_default__nav" role="tablist">
+                            <li class="slds-tabs_default__item slds-is-active" title="Detalhes" role="presentation">
+                                <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Detalhes</a>
+                            </li>
+                            <li class="slds-tabs_default__item" title="Feed" role="presentation">
+                                <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Feed</a>
+                            </li>
+                            <li class="slds-tabs_default__item" title="Atividades" role="presentation">
+                                <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item">Atividades</a>
+                            </li>
+                            <li class="slds-tabs_default__item" title="Relacionados" role="presentation">
+                                <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-4" id="tab-default-4__item">Relacionados</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Conteúdo das Abas -->
+                    <div class="tab-content">
+                        <!-- Detalhes do Caso -->
+                        <div class="details-section slds-m-bottom_x-large">
+                            <h2 class="section-title">Detalhes do Caso</h2>
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="detail-field">
+                                        <span class="detail-label">Número do Caso</span>
+                                        <span class="detail-value">{caseNumber}</span>
+                                    </div>
+                                    <div class="detail-field">
+                                        <span class="detail-label">Proprietário</span>
+                                        <span class="detail-value">{ownerName}</span>
+                                    </div>
+                                    <div class="detail-field">
+                                        <span class="detail-label">Status</span>
+                                        <span class="detail-value status-badge-inline" data-status={lowercaseStatus}>{status}</span>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="detail-field">
+                                        <span class="detail-label">Prioridade</span>
+                                        <span class={priorityClasses}>{priority}</span>
+                                    </div>
+                                    <div class="detail-field">
+                                        <span class="detail-label">Data de Abertura</span>
+                                        <span class="detail-value">{createdDate}</span>
+                                    </div>
+                                    <div class="detail-field">
+                                        <span class="detail-label">Origem</span>
+                                        <span class="detail-value">{origin}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Descrição -->
+                        <div class="description-section slds-m-bottom_x-large">
+                            <h2 class="section-title">Descrição</h2>
+                            <div class="description-content">
+                                <p>{description}</p>
+                            </div>
+                        </div>
+
+                        <!-- Feed de Atividades -->
+                        <div class="activity-feed slds-m-bottom_x-large">
+                            <h2 class="section-title">Atividade Recente</h2>
+                            <div class="feed-item">
+                                <div class="feed-avatar">
+                                    <lightning-avatar src={ownerPhotoUrl} fallback-icon-name="standard:user" size="small" alternative-text={ownerName}></lightning-avatar>
+                                </div>
+                                <div class="feed-content">
+                                    <div class="feed-header">
+                                        <span class="feed-author">{ownerName}</span>
+                                        <span class="feed-time">{createdDate}</span>
+                                    </div>
+                                    <div class="feed-message">
+                                        <p>Registro</p>
+                                        <p>Case criado</p>
+                                        <p>Assunto: {subject}</p>
+                                        <p>Prioridade: {priority}</p>
+                                        <p>Status: {status}</p>
+                                        <p>Número do Caso: {caseNumber}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita - Informações Relacionadas -->
+                <div class="slds-col slds-large-size_1-of-3">
+                    <!-- Informações do Contato -->
+                    <div class="related-section contact-info slds-m-bottom_large">
+                        <h2 class="section-title">Informações do Contato</h2>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-1">
+                                <div class="detail-field">
+                                    <span class="detail-label">Nome</span>
+                                    <span class="detail-value">{contactName}</span>
+                                </div>
+                                <div class="detail-field">
+                                    <span class="detail-label">Cargo</span>
+                                    <span class="detail-value">{contactTitle}</span>
+                                </div>
+                                <div class="detail-field">
+                                    <span class="detail-label">Empresa</span>
+                                    <span class="detail-value">{contactAccount}</span>
+                                </div>
+                                <div class="detail-field">
+                                    <span class="detail-label">Email</span>
+                                    <span class="detail-value">{contactEmail}</span>
+                                </div>
+                                <div class="detail-field">
+                                    <span class="detail-label">Telefone</span>
+                                    <span class="detail-value">{contactPhone}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Casos Relacionados -->
+                    <div class="related-section related-cases slds-m-bottom_large">
+                        <h2 class="section-title">Casos do Contato (3)</h2>
+                        <div class="related-case">
+                            <div class="case-header">
+                                <span class="case-number">00001029</span>
+                                <span class="case-priority priority-medium">Medium</span>
+                            </div>
+                            <div class="case-subject">Problema com o produto XYZ</div>
+                            <div class="case-date">11/04/2025 18:25</div>
+                        </div>
+                        <div class="related-case">
+                            <div class="case-header">
+                                <span class="case-number">00001028</span>
+                                <span class="case-priority priority-medium">Medium</span>
+                            </div>
+                            <div class="case-subject">Problema de login</div>
+                            <div class="case-date">11/04/2025 18:08</div>
+                        </div>
+                        <div class="related-case">
+                            <div class="case-header">
+                                <span class="case-number">00001027</span>
+                                <span class="case-priority priority-medium">Medium</span>
+                            </div>
+                            <div class="case-subject">Atualização de software</div>
+                            <div class="case-date">11/04/2025 18:08</div>
+                        </div>
+                        <div class="view-all">
+                            <a href="javascript:void(0);">Ver todos os casos</a>
+                        </div>
+                    </div>
+
+                    <!-- Anexos -->
+                    <div class="related-section attachments slds-m-bottom_large">
+                        <h2 class="section-title">Anexos (0)</h2>
+                        <div class="attachment-upload">
+                            <lightning-file-upload
+                                label="Adicionar Arquivos"
+                                name="fileUploader"
+                                accept={acceptedFormats}
+                                record-id={recordId}
+                                onuploadfinished={handleUploadFinished}
+                                multiple>
+                            </lightning-file-upload>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rodapé com Ações -->
+        <div class="action-footer slds-p-around_large">
+            <lightning-button
+                label="Voltar para Lista"
+                onclick={handleBackToList}
+                variant="neutral"
+                class="slds-m-right_small">
+            </lightning-button>
+            <lightning-button
+                label="Editar"
+                onclick={handleEdit}
+                variant="brand">
+            </lightning-button>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,210 @@
+<template>
+    <lightning-card title="Cadastro de Contato com Consulta de CEP" icon-name="standard:contact">
+        <div class="slds-p-around_medium">
+            <!-- Loading spinner -->
+            <template if:true={isLoading}>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+                <div class="slds-align_absolute-center" style="height:5rem">
+                    <lightning-spinner alternative-text="Carregando" size="medium"></lightning-spinner>
+                </div>
+            </template>
+            
+            <!-- Formulário de Contato -->
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Informações do Contato">Informações do Contato</span>
+                </h3>
+                
+                <div class="slds-section__content">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input 
+                                label="Nome" 
+                                name="FirstName" 
+                                value={contato.FirstName}
+                                onchange={handleContactFieldChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input 
+                                label="Sobrenome" 
+                                name="LastName" 
+                                value={contato.LastName}
+                                onchange={handleContactFieldChange}
+                                required>
+                            </lightning-input>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input 
+                                label="E-mail" 
+                                name="Email" 
+                                type="email"
+                                value={contato.Email}
+                                onchange={handleContactFieldChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input 
+                                label="Telefone" 
+                                name="Phone" 
+                                type="tel"
+                                value={contato.Phone}
+                                onchange={handleContactFieldChange}
+                                placeholder="(99) 9999-9999">
+                            </lightning-input>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input 
+                                label="Celular" 
+                                name="MobilePhone" 
+                                type="tel"
+                                value={contato.MobilePhone}
+                                onchange={handleContactFieldChange}
+                                placeholder="(99) 99999-9999">
+                            </lightning-input>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input 
+                                label="Cargo" 
+                                name="Title" 
+                                value={contato.Title}
+                                onchange={handleContactFieldChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input 
+                                label="Departamento" 
+                                name="Department" 
+                                value={contato.Department}
+                                onchange={handleContactFieldChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </div>
+            
+            <!-- Seção de Endereço -->
+            <div class="slds-section slds-is-open slds-m-top_medium">
+                <h3 class="slds-section__title slds-theme_shade">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Endereço">Endereço</span>
+                </h3>
+                
+                <div class="slds-section__content">
+                    <lightning-layout multiple-rows>
+                        <!-- Input do CEP e botão de busca -->
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-layout>
+                                <lightning-layout-item size="8" padding="horizontal-small">
+                                    <lightning-input 
+                                        label="CEP" 
+                                        type="text" 
+                                        value={cep} 
+                                        onchange={handleCepChange}
+                                        placeholder="00000-000"
+                                        pattern="[0-9]{5}-?[0-9]{3}"
+                                        message-when-pattern-mismatch="Formato inválido. Use 00000-000 ou 00000000">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="4" padding="horizontal-small" class="slds-align-bottom">
+                                    <lightning-button 
+                                        label="Buscar CEP" 
+                                        onclick={buscarEndereco}
+                                        variant="brand" 
+                                        disabled={isLoading}
+                                        class="slds-m-top_large">
+                                    </lightning-button>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-combobox
+                                label="País"
+                                name="pais"
+                                value={endereco.pais}
+                                options={paisOptions}
+                                onchange={handleEnderecoFieldChange}>
+                            </lightning-combobox>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="8" padding="around-small">
+                            <lightning-input 
+                                label="Logradouro" 
+                                name="logradouro" 
+                                value={endereco.logradouro}
+                                onchange={handleEnderecoFieldChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="4" padding="around-small">
+                            <lightning-input 
+                                label="Bairro" 
+                                name="bairro" 
+                                value={endereco.bairro}
+                                onchange={handleEnderecoFieldChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input 
+                                label="Cidade" 
+                                name="localidade" 
+                                value={endereco.localidade}
+                                onchange={handleEnderecoFieldChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-combobox
+                                label="Estado/UF"
+                                name="uf"
+                                value={endereco.uf}
+                                options={estadoOptions}
+                                onchange={handleEnderecoFieldChange}>
+                            </lightning-combobox>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </div>
+            
+            <!-- Mensagem de erro -->
+            <template if:true={hasError}>
+                <div class="slds-p-around_medium slds-text-color_error">
+                    {errorMessage}
+                </div>
+            </template>
+            
+            <!-- Botões de ação -->
+            <div class="slds-m-top_medium slds-text-align_right">
+                <lightning-button 
+                    label="Limpar" 
+                    onclick={limparForm}
+                    variant="neutral" 
+                    class="slds-m-right_x-small"
+                    disabled={isLoading}>
+                </lightning-button>
+                
+                <lightning-button 
+                    label="Testar ViaCEP" 
+                    onclick={testConnection}
+                    variant="neutral" 
+                    class="slds-m-right_x-small"
+                    disabled={isLoading}>
+                </lightning-button>
+                
+                <lightning-button 
+                    label="Salvar Contato" 
+                    onclick={salvarContato}
+                    variant="success" 
+                    disabled={isLoading}>
+                </lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>
